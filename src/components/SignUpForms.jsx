@@ -15,11 +15,17 @@ export default function SignUpForm() {
                 },
                 body : JSON.stringify({
                     username: username,
-                    password: password
+                    password: password,
                 })
             });
             const result = await response.json();
             console.log(result);
+
+            if (response.ok) {
+                setToken(result.token);
+            } else {
+                setError(result.message);
+            }
         } catch (error){
             setError(error.message);
         }
